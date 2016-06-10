@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<widget id="TemplateGridSingleItemWidget.widget.TemplateGridSingleItemWidget" needsEntityContext="true" offlineCapable="true" xmlns="http://www.mendix.com/widget/1.0/">
+    <name>TemplateGrid single item widget</name>
+    <description>The description of this widget.</description>
+
+    <icon />
+
+    <properties>
+        <property key="newButtonClass" type="string" required="true" defaultValue="newButtonAutoHide">
+            <caption>New button class</caption>
+            <category>Common</category>
+            <description>The class to find the new button.</description>
+        </property>
+        <property key="editButtonClass" type="string" required="true" defaultValue="editButtonAutoHide">
+            <caption>Edit button class</caption>
+            <category>Common</category>
+            <description>The class to find the edit button.</description>
+        </property>
+    </properties>
+</widget>
+
