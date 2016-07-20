@@ -475,7 +475,7 @@ h1, h2, h3, h4, h5, h6,
   border-color: #FFF;
 }
 .region-topbar .toggle-btn:focus, .region-topbar .toggle-btn:hover, .region-topbar .toggle-btn:active, .region-topbar .toggle-btn.active {
-  background-color: #26316d;
+  background-color: #25306c;
 }
 .region-topbar .navbar-right .mx-appswitcher-button-placeholder,
 .region-topbar .navbar-right .mx-profilemenu-button-placeholder {
@@ -1135,4 +1135,22 @@ body .mx-header .mx-header-left .mx-link a {
 }
 .templategrid-profilecard .templategrid-profilecard-subtitle {
   /* Styles here */
+}
+
+/** Custom styles for the test project */
+.mx-templategrid.mx-name-templateGridTaskItemOffline .mx-templategrid-item.selected {
+  background-color: #FFF !important;
+}
+
+.mx-grid.mx-templategrid.TemplateGridSingleItem {
+  margin: 0px;
+  height: 50px;
+}
+.mx-grid.mx-templategrid.TemplateGridSingleItem .mx-grid-toolbar {
+  float: right;
+}
+.mx-grid.mx-templategrid.TemplateGridSingleItem .mx-grid-content {
+  position: relative;
+  top: -50px;
+  width: 50%;
 }
