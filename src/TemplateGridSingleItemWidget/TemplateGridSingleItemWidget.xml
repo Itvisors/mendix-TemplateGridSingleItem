@@ -16,6 +16,11 @@
             <category>Common</category>
             <description>The class to find the edit button.</description>
         </property>
+        <property key="additionalCssSelector" type="string" required="false">
+            <caption>Additional CSS selector</caption>
+            <category>Common</category>
+            <description>Optional. CSS selector to find other elements within the same parent. The widget will put CSS class newButtonActive or editButtonActive on any elements found. Remember to use the , to target multiple elements!</description>
+        </property>
     </properties>
 </widget>
 

@@ -27,22 +27,19 @@ define([
     "dojo/dom-class",
     "dojo/_base/array",
     "dojo/_base/lang",
-    "dojo/_base/event"
+    "dojo/_base/event",
+    "dojo/NodeList-dom"
 ], function (declare, _WidgetBase, dom, dojoQuery, dojoStyle, dojoClass, dojoArray, dojoLang, dojoEvent) {
     "use strict";
 
     // Declare widget"s prototype.
     return declare("TemplateGridSingleItemWidget.widget.TemplateGridSingleItemWidget", [ _WidgetBase ], {
 
-        // DOM elements
-        inputNodes: null,
-        colorSelectNode: null,
-        colorInputNode: null,
-        infoTextNode: null,
 
         // Parameters configured in the Modeler.
         newButtonClass: "",
         editButtonClass: "",
+        additionalCssSelector: "",
 
         // Internal variables. Non-primitives created in the prototype are shared between all widget instances.
         _handles: null,
@@ -120,10 +117,15 @@ define([
 			
             this.observer.disconnect();
             dojoQuery("div.mx-templategrid-content-wrapper", templateGrid).forEach(function (node, index, arr) {
-                console.dir(node);
+                //console.dir(node);
                 thisObj.observer.observe(node, { attributes: false, childList: true, characterData: false });
             });
-
+            
+            this.newButtonNodeList = dojoQuery("." + this.newButtonClass, this.domNode.previousSibling);
+            this.editButtonNodeList = dojoQuery(" ." + this.editButtonClass, this.domNode.previousSibling);
+            if (this.additionalCssSelector) {
+                this.additionalNodeList = dojoQuery(this.additionalCssSelector, this.domNode.parentNode);
+            }
         },
         
         handleObserverEvent: function (mutations) {
@@ -132,10 +134,10 @@ define([
                 thisObj = this;
 
             mutations.forEach(function (mutation) {
-                console.dir(mutation);
+                //console.dir(mutation);
                 isEmptyGrid = false;
                 dojoQuery("div.mx-templategrid-empty", mutation.target).forEach(function (node, index, arr) {
-                    console.dir(node);
+                    //console.dir(node);
                     isEmptyGrid = true;
                 });
                 
@@ -143,7 +145,7 @@ define([
                 // We can only get here when it has been confirmed that the previous sibling is a template grid.
 
                 dojoQuery("." + thisObj.newButtonClass, thisObj.domNode.previousSibling).forEach(function (node, index, arr) {
-                    console.dir(node);
+                    //console.dir(node);
                     if (isEmptyGrid) {
                         dojoStyle.set(node, "display", "inline-block");
                     } else {
@@ -152,13 +154,21 @@ define([
                 });
 
                 dojoQuery(" ." + thisObj.editButtonClass, thisObj.domNode.previousSibling).forEach(function (node, index, arr) {
-                    console.dir(node);
+                    //console.dir(node);
                     if (isEmptyGrid) {
                         dojoStyle.set(node, "display", "none");
                     } else {
                         dojoStyle.set(node, "display", "inline-block");
                     }
                 });
+                
+                if (thisObj.additionalCssSelector) {
+                    if (isEmptyGrid) {
+                        dojoQuery(thisObj.additionalCssSelector, thisObj.domNode.parentNode).replaceClass("newButtonActive", "editButtonActive");
+                    } else {
+                        dojoQuery(thisObj.additionalCssSelector, thisObj.domNode.parentNode).replaceClass("editButtonActive", "newButtonActive");
+                    }
+                }
             });
             
         },
